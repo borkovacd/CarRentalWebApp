@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,6 +37,11 @@ public class Vehicle {
 	private VehicleBodyType bodyType; // tip karoserije
 	
 	@ManyToMany
+	@JoinTable(
+	        name = "vehicle_fuel_types", 
+	        joinColumns = { @JoinColumn(name = "vehicle_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "fuel_type_id") }
+	)
 	private List<VehicleFuelType> fuelTypes = new ArrayList<VehicleFuelType>(); //tip goriva
 	
 	private int engineVolume; // zapremina motora
