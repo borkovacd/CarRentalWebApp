@@ -24,38 +24,40 @@ public class Vehicle {
 	private Long id;
 	
 	@ManyToOne
-	private VehicleType type;
+	private VehicleType type; // tip vozila
 	
 	@ManyToOne
-	private VehicleBrand brand;
+	private VehicleBrand brand; // proizvodjac
 	
-	private String model;
+	private String model; // model
 	
 	@ManyToOne
-	private VehicleBodyType bodyType;
+	private VehicleBodyType bodyType; // tip karoserije
 	
 	@ManyToMany
-	private List<VehicleFuelType> fuelTypes = new ArrayList<VehicleFuelType>();
+	private List<VehicleFuelType> fuelTypes = new ArrayList<VehicleFuelType>(); //tip goriva
 	
-	private int engineVolume;
+	private int engineVolume; // zapremina motora
 	
-	private double enginePower;
+	private double enginePower; // snaga motora
 	
-	private TransmissionType transmissionType;
+	private TransmissionType transmissionType; // tip menjaca
 	
-	private int gearNumber;
+	private int gearNumber; //broj brzina
 	
-	private DriveType driveType;
+	private DriveType driveType; // tip pogona
 	
-	private int numberOfSeats;
+	private int numberOfSeats; // broj sedista
 	
-	private int numberOfDoors;
+	private int numberOfDoors; // broj vrata
 	
 	private BigDecimal rentalPrice; //price per day
 	
 	private String name;
 	
 	private String description;
+	
+	private boolean deleted;
 	
 	
 	

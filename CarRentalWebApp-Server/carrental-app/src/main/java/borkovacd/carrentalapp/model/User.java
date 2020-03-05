@@ -54,5 +54,11 @@ public class User {
 	
 	@Column(name = "user_type", nullable = false)
 	private UserType userType;
+	
+	@Column(name = "blocked")
+	private boolean blocked;
+	
+	@Column(name = "deleted")
+	private boolean deleted;
 
 }
