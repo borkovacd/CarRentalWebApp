@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,15 @@ import javax.persistence.Table;
 
 import borkovacd.carrentalapp.enums.DriveType;
 import borkovacd.carrentalapp.enums.TransmissionType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter	
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(catalog = "db_carrental", name = "vehicle")
 public class Vehicle {
@@ -65,6 +74,15 @@ public class Vehicle {
 	private String description;
 	
 	private boolean deleted;
+	
+	// *** CHECK IF IT'S GOOD PRACTICE ***
+	public List<String> getFuelTypesNames() {
+		List<String> fuelTypesNames = new ArrayList<String>();
+		for(VehicleFuelType ft : getFuelTypes()) {
+			fuelTypesNames.add(ft.getName());
+		}
+		return fuelTypesNames;
+	}
 	
 	
 	
