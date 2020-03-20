@@ -22,4 +22,10 @@ public class VehicleService {
 		return vehicleRepository.findById(id).orElse(null);
 	}
 
+	public Vehicle save(Vehicle vehicle) {
+		return vehicleRepository.save(vehicle);
+	}
+
+
+
 }

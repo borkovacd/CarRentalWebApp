@@ -6,4 +6,6 @@ import borkovacd.carrentalapp.model.VehicleType;
 
 public interface VehicleTypeRepository extends JpaRepository<VehicleType, Long> {
 
+	VehicleType findVehicleTypeByName(String typeName);
+
 }
