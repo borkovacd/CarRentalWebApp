@@ -1,5 +1,6 @@
 package borkovacd.carrentalapp.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,20 +48,24 @@ public class VehicleController {
 	VehicleFuelTypeService vehicleFuelTypeService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<PageDTO<VehicleDTO>> getAllVehicles(Pageable pageable) {
+	public ResponseEntity<PageDTO<VehicleDTO>> getAllVehicles(
+			@RequestParam(required = false, defaultValue = "") String type,
+			@RequestParam(required = false, defaultValue = "") String brand,
+			@RequestParam(required = false, defaultValue = "") String model,
+			@RequestParam(required = false) BigDecimal lowestPrice, 
+			@RequestParam(required = false) BigDecimal highestPrice,
+			Pageable pageable) {
 		List<VehicleDTO> vehicles = new ArrayList<VehicleDTO>();
-		Page<Vehicle> page = vehicleService.getVehicles(pageable);
+		Page<Vehicle> page = vehicleService.getVehicles(type, brand, model, lowestPrice, highestPrice, pageable);
 		for(Vehicle vehicle : page.getContent()) {
-			if(vehicle.isDeleted() == false) {
-				ModelMapper modelMapper = new ModelMapper();
-				// *** CHECK IF IT'S GOOD PRACTICE ***
-				modelMapper.typeMap(Vehicle.class, VehicleDTO.class).addMappings(mapper -> {
-					mapper.map(src -> src.getFuelTypesNames(),
-							VehicleDTO::setFuelTypes);
-					});
-				VehicleDTO vehicleDTO = modelMapper.map(vehicle, VehicleDTO.class);
-				vehicles.add(vehicleDTO);
-			}
+			ModelMapper modelMapper = new ModelMapper();
+			// *** CHECK IF IT'S GOOD PRACTICE ***
+			modelMapper.typeMap(Vehicle.class, VehicleDTO.class).addMappings(mapper -> {
+				mapper.map(src -> src.getFuelTypesNames(),
+						VehicleDTO::setFuelTypes);
+				});
+			VehicleDTO vehicleDTO = modelMapper.map(vehicle, VehicleDTO.class);
+			vehicles.add(vehicleDTO);
 		}
 		PageDTO<VehicleDTO> pageDTO = new PageDTO<VehicleDTO>(pageable.getPageNumber(), pageable.getPageSize(), 
 				page.getTotalElements(), vehicles);

@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import borkovacd.carrentalapp.enums.DriveType;
 import borkovacd.carrentalapp.enums.TransmissionType;
 import lombok.AllArgsConstructor;
@@ -28,6 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(catalog = "db_carrental", name = "vehicle")
+@Where(clause="deleted=0")
 public class Vehicle {
 	
 	@Id
