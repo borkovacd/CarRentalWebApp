@@ -3,6 +3,8 @@ import {Page} from '../model/page';
 import {Vehicle} from '../model/vehicle';
 import {VehicleService} from '../service/vehicle.service';
 import {Search} from '../model/search';
+import {AppService} from '../app.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-home-page',
@@ -19,10 +21,17 @@ export class HomePageComponent implements OnInit {
   allFilters : Search = null;
   private page: number = 1;
 
+  greeting = null;
+
+
   @Output("items")
   vehiclesPage: Page<Vehicle> = {currentPage: 0, itemsPerPage: 0, totalItems: 0, items: []}
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService, private app: AppService, private http: HttpClient) {
+    http.get('api/resource').subscribe(data => this.greeting = data);
+  }
+
+  authenticated() { return this.app.authenticated; }
 
   ngOnInit(): void {
     this.refreshView();

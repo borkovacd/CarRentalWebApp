@@ -1,12 +1,22 @@
-<div class="row mt-sm-4">
+<div [hidden]="!authenticated()" class="row mt-sm-4">
   <div class="col-12">
     <app-search-form (onSearch)="setFilter($event)"></app-search-form>
   </div>
 </div>
-<div class="mt-sm-4">
+
+<h1>Greeting</h1>
+<div [hidden]="!authenticated()" *ngIf="greeting!=null">
+  <p>The ID is {{greeting.id}}</p>
+  <p>The content is {{greeting.content}}</p>
+</div>
+<div [hidden]="authenticated()">
+  <p>Login to see your greeting</p>
+</div>
+
+<div [hidden]="!authenticated()" class="mt-sm-4">
   <app-vehicles-overview [items]="vehiclesPage.items"></app-vehicles-overview>
 </div>
-<div class="mx-auto " style="width: fit-content;">
+<div [hidden]="!authenticated()" class="mx-auto " style="width: fit-content;">
   <ngb-pagination [page]="vehiclesPage.currentPage" (pageChange)="setPage($event)" [pageSize]="vehiclesPage.itemsPerPage"
                   [collectionSize]="vehiclesPage.totalItems"></ngb-pagination>
 </div>
