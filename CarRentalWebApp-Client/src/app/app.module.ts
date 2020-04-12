@@ -6,22 +6,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { VehiclesOverviewComponent } from './vehicles-overview/vehicles-overview.component';
-import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import { SearchFormComponent } from './search-form/search-form.component';
 import {FormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import {AppService} from './app.service';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { BoardUserComponent } from './board-user/board-user.component';
 
-@Injectable()
-export class XhrInterceptor implements HttpInterceptor {
-
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const xhr = req.clone({
-      headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
-    });
-    return next.handle(xhr);
-  }
-}
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,16 +24,21 @@ export class XhrInterceptor implements HttpInterceptor {
     HomePageComponent,
     VehiclesOverviewComponent,
     SearchFormComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    ProfileComponent,
+    BoardAdminComponent,
+    BoardUserComponent,
   ],
   imports: [
     BrowserModule,
-    NgbModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
-  providers: [AppService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

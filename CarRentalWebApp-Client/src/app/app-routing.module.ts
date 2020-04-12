@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomePageComponent} from './home-page/home-page.component';
+import {HomeComponent} from './home/home.component';
+import {BoardAdminComponent} from './board-admin/board-admin.component';
+import {BoardUserComponent} from './board-user/board-user.component';
+import {ProfileComponent} from './profile/profile.component';
 import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home'},
-  { path: 'home', component: HomePageComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  //{ path: '**', component: HomePageComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'user', component: BoardUserComponent },
+  { path: 'admin', component: BoardAdminComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
