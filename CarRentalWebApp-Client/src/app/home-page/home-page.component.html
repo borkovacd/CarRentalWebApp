@@ -3,10 +3,10 @@
     <app-search-form (onSearch)="setFilter($event)"></app-search-form>
   </div>
 </div>
-<div class="mt-sm-4">
+<div class="mt-sm-4" >
   <app-vehicles-overview [items]="vehiclesPage.items"></app-vehicles-overview>
 </div>
-<div class="mx-auto " style="width: fit-content;">
+<div class="mx-auto mt-sm-4" style="width: fit-content;">
   <ngb-pagination [page]="vehiclesPage.currentPage" (pageChange)="setPage($event)" [pageSize]="vehiclesPage.itemsPerPage"
                   [collectionSize]="vehiclesPage.totalItems"></ngb-pagination>
 </div>

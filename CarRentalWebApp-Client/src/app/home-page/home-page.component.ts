@@ -3,6 +3,8 @@ import {Page} from '../model/page';
 import {Vehicle} from '../model/vehicle';
 import {VehicleService} from '../service/vehicle.service';
 import {Search} from '../model/search';
+import {TokenStorageService} from '../_services/token-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +24,11 @@ export class HomePageComponent implements OnInit {
   @Output("items")
   vehiclesPage: Page<Vehicle> = {currentPage: 0, itemsPerPage: 0, totalItems: 0, items: []}
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService,
+              private tokenStorageService: TokenStorageService,
+              public router: Router) {
+  }
+
 
   ngOnInit(): void {
     this.refreshView();
@@ -49,6 +55,7 @@ export class HomePageComponent implements OnInit {
     this.filterVehicleHighestPrice = filters.highestPrice;
     this.refreshView();
   }
+
 
 
 }

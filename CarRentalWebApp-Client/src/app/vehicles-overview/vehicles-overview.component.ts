@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Vehicle} from '../model/vehicle';
+import {Search} from '../model/search';
 
 @Component({
   selector: 'app-vehicles-overview',

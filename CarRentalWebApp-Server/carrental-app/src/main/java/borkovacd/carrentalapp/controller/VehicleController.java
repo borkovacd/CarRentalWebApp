@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,7 @@ public class VehicleController {
 	VehicleFuelTypeService vehicleFuelTypeService;
 	
 	@RequestMapping(method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<PageDTO<VehicleDTO>> getAllVehicles(
 			@RequestParam(required = false, defaultValue = "") String type,
 			@RequestParam(required = false, defaultValue = "") String brand,

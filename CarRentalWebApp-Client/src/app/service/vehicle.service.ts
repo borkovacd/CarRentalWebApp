@@ -39,4 +39,8 @@ export class VehicleService {
     }
     return this.client.get<Page<Vehicle>>("api/vehicles", options)
   }
+
+  getVehicle(id: number) : Observable<Vehicle>{
+    return this.client.get<Vehicle>("api/vehicles/"+id);
+  }
 }
