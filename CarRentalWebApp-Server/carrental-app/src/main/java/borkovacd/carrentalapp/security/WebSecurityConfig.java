@@ -18,13 +18,14 @@ import borkovacd.carrentalapp.security.jwt.AuthEntryPointJwt;
 import borkovacd.carrentalapp.security.jwt.AuthTokenFilter;
 import borkovacd.carrentalapp.security.services.UserDetailsServiceImpl;
 
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(
+@Configuration // --> allows any Java application to work with Spring Security in the Spring framework
+@EnableWebSecurity // --> allows Spring to find and automatically apply the class to the global Web Security
+@EnableGlobalMethodSecurity( // -- > provides AOP security on methods. It enables @PreAuthorize, @PostAuthorize, it also supports JSR-250
 		//securedEnabled = true,
 		//jsr250Enabled = true,
 		prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter { 
+	// WebSecurityConfigurerAdapter -> This library designates this class as the security configuration under Spring Security.
 	
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
@@ -37,10 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); 
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); 
 	}
 	
+	//In newer versions of Spring Boot this needs to be done, 'cause there is no more default implementation of AuthenticationManager
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -52,15 +54,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
+	// It tells Spring Security how we configure CORS and CSRF, when we want to require all users to be authenticated or not, which filter 
+	// (AuthTokenFilter) and when we want it to work 
+	// (filter before UsernamePasswordAuthenticationFilter), which Exception Handler is chosen (AuthEntryPointJwt).
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //telling spring security not to create a session
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/api/test/**").permitAll()
-			.anyRequest().authenticated();
+			.antMatchers("/api/test/**").permitAll() //why permit all?
+			.antMatchers("/api/brands").permitAll()
+			.antMatchers("/api/types").permitAll()
+			.antMatchers("/api/bodyTypes").permitAll()
+			.antMatchers("/api/fuelTypes").permitAll()
+			.anyRequest().authenticated(); //ensures that any HTTP request that comes to the filter will be checked for authentication.
 
+		//making sure that my filter is called before UsernamePasswordAuthenticationFilter
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 

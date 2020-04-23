@@ -6,8 +6,8 @@
         <h5 class="card-title">{{item.brandName}} {{item.model}}</h5>
         <p class="card-text" >{{item.description}}</p>
         <div class="row">
-          <a href="#" class="btn btn-primary ml-1">Detalji</a>
-          <a href="#" class="btn btn-success ml-4">Iznajmi ({{item.rentalPrice}}€)</a>
+          <a href="#" class="btn btn-primary ml-1" [routerLink]="['/details',item.id]">Detalji</a>
+          <a href="#" class="btn btn-success ml-4" [routerLink]="['/renting',item.id]">Iznajmi ({{item.rentalPrice}}€)</a>
         </div>
       </div>
     </div>

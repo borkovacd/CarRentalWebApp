@@ -12,6 +12,12 @@ import borkovacd.carrentalapp.security.services.UserDetailsImpl;
 
 import io.jsonwebtoken.*;
 
+/*
+ This class has 3 funtions:
+	- generate a JWT from username, date, expiration, secret
+	- get username from JWT
+	- validate a JWT
+ */
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);

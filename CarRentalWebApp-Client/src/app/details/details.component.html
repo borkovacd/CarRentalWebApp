@@ -1,0 +1,27 @@
+<div *ngIf="item">
+<h3>Detalji</h3>
+<table class="table table-borderless border-dark border-top mr-0">
+  <tr>
+    <td>Tip: <b>{{item.typeName}}</b></td>
+    <td>Gorivo: <b>{{item.fuelTypes}}</b></td>
+    <td>Broj vrata: <b>{{item.numberOfDoors}}</b></td>
+  </tr>
+  <tr>
+    <td>Proizvođač: <b>{{item.brandName}}</b></td>
+    <td>Zapremina motora: <b>{{item.engineVolume}}</b></td>
+    <td>Broj sedišta: <b>{{item.numberOfSeats}}</b></td>
+  </tr>
+  <tr>
+    <td>Model: <b>{{item.model}}</b></td>
+    <td>Snaga motora: <b>{{item.enginePower}}</b></td>
+  </tr>
+  <tr>
+    <td>Tip karoserije: <b>{{item.bodyTypeName}}</b></td>
+    <td>Menjač: <b>{{item.driveType}} {{item.gearNumber}}</b></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Pogon: <b>{{item.transmissionType}}</b></td>
+  </tr>
+</table>
+</div>

@@ -1,0 +1,41 @@
+<div *ngIf="vehicle">
+  <div class="row mt-2">
+    <div class="col text-left">
+      <h4>{{vehicle.brandName}} {{vehicle.model}}</h4>
+    </div>
+    <div class="col text-right">
+      <h4>
+        Cena: {{vehicle.rentalPrice}}€
+        <button class="btn btn-success" [routerLink]="['/renting',vehicle.id]">Iznajmi!</button>
+      </h4>
+    </div>
+  </div>
+  <carousel>
+    <slide>
+      <img src="https://www.seslhd.health.nsw.gov.au/sites/default/files/2018-07/320x200.png" alt="first slide"
+           style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </slide>
+    <slide>
+      <img src="https://www.seslhd.health.nsw.gov.au/sites/default/files/2018-07/320x200.png" alt="second slide"
+           style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </slide>
+    <slide>
+      <img src="https://www.seslhd.health.nsw.gov.au/sites/default/files/2018-07/320x200.png" alt="third slide"
+           style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </slide>
+  </carousel>
+  <p>{{vehicle.description}}</p>
+  <app-details [item]="vehicle"></app-details>
+</div>
