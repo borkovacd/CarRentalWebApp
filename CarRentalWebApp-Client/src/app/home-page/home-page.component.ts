@@ -20,6 +20,7 @@ export class HomePageComponent implements OnInit {
   filterVehicleHighestPrice: number = null;
   allFilters : Search = null;
   private page: number = 1;
+  isLoggedIn = false;
 
   @Output("items")
   vehiclesPage: Page<Vehicle> = {currentPage: 0, itemsPerPage: 0, totalItems: 0, items: []}
@@ -31,7 +32,9 @@ export class HomePageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.refreshView();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if(this.isLoggedIn)
+      this.refreshView();
   }
 
   public refreshView(page: number = 1) {

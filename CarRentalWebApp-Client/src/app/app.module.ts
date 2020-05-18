@@ -8,10 +8,9 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { VehiclesOverviewComponent } from './vehicles-overview/vehicles-overview.component';
 import {HttpClientModule} from '@angular/common/http';
 import { SearchFormComponent } from './search-form/search-form.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
@@ -22,6 +21,14 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import { DetailsComponent } from './details/details.component';
 import { RentalFormComponent } from './rental-form/rental-form.component';
 import {MomentModule} from 'angular2-moment';
+import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { UsersPageComponent } from './users-page/users-page.component';
+import { SearchFormUsersComponent } from './search-form-users/search-form-users.component';
+import { UsersOverviewComponent } from './users-overview/users-overview.component';
+import { VehiclesTableOverviewComponent } from './vehicles-table-overview/vehicles-table-overview.component';
+import { VehiclesPageComponent } from './vehicles-page/vehicles-page.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import {ForbiddenValidatorDirective} from './_custom_validators/forbidden-name.directive';
 
 @NgModule({
   declarations: [
@@ -31,13 +38,20 @@ import {MomentModule} from 'angular2-moment';
     SearchFormComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     ProfileComponent,
     BoardAdminComponent,
     BoardUserComponent,
     VehicleDetailsComponent,
     DetailsComponent,
-    RentalFormComponent
+    RentalFormComponent,
+    AddVehicleComponent,
+    UsersPageComponent,
+    SearchFormUsersComponent,
+    UsersOverviewComponent,
+    VehiclesTableOverviewComponent,
+    VehiclesPageComponent,
+    AddUserComponent,
+    ForbiddenValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -47,7 +61,8 @@ import {MomentModule} from 'angular2-moment';
     NgbModule,
     BrowserAnimationsModule,
     CarouselModule,
-    MomentModule
+    MomentModule,
+    ReactiveFormsModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

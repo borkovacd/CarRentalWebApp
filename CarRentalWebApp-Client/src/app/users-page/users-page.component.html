@@ -1,0 +1,12 @@
+<div class="row mt-sm-4">
+  <div class="col-12">
+    <app-search-form-users (onSearch)="setFilter($event)"></app-search-form-users>
+  </div>
+</div>
+<div class="mt-sm-4" >
+  <app-users-overview [items]="usersPage.items"></app-users-overview>
+</div>
+<div class="mx-auto mt-sm-4" style="width: fit-content;">
+  <ngb-pagination [page]="usersPage.currentPage" (pageChange)="setPage($event)" [pageSize]="usersPage.itemsPerPage"
+                  [collectionSize]="usersPage.totalItems"></ngb-pagination>
+</div>

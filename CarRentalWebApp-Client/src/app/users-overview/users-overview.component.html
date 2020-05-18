@@ -1,0 +1,41 @@
+<div class="row ml-md-2">
+  <div class="col-10">
+    <h3>Korisnici:</h3>
+  </div>
+  <div class="col">
+    <a [routerLink]="['/add-user']" class="btn btn-success mr-auto ml-auto">Dodaj korisnika</a>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Ime</th>
+      <th scope="col">Prezime</th>
+      <th scope="col">Korisničko ime</th>
+      <th scope="col">Blokiran</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.username}}</td>
+      <td>{{item.blocked}}</td>
+      <td></td>
+      <td></td>
+      <td>
+        <a [routerLink]="['/change', item.id]" class="btn btn-success ml-1" href="#">Izmeni</a>
+        <a class="btn btn-warning ml-4" (click)="blockUser(item.id)" href="#">Blokiraj</a>
+        <a class="btn btn-danger ml-4" (click)="deleteUser(item.id)" href="#">Izbriši</a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+

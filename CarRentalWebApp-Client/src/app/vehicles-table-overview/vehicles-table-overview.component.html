@@ -1,0 +1,35 @@
+<div class="row ml-md-2">
+  <div class="col-10">
+    <h3>Vozila:</h3>
+  </div>
+  <div class="col">
+    <a [routerLink]="['/add-vehicle']" class="btn btn-success mr-auto ml-auto">Dodaj vozilo</a>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Naziv</th>
+      <th scope="col">Marka</th>
+      <th scope="col">Model</th>
+      <th scope="col">Cena</th>
+      <th style="alignment: right" scope="col">Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.name}}</td>
+      <td>{{item.brandName}}</td>
+      <td>{{item.model}}</td>
+      <td>{{item.rentalPrice}}</td>
+      <td style="alignment: right">
+        <a [routerLink]="['/add-vehicle', item.id]" class="btn btn-success ml-1">Izmeni</a>
+        <a class="btn btn-danger ml-4" (click)="deleteVehicle(item.id)">Izbriši</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+

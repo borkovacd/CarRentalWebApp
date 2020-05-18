@@ -1,3 +1,17 @@
+<div class="jumbotron " *ngIf="!isLoggedIn">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-3">Dobrodošli!</h1>
+      <p class="mt-xl-5">Da biste mogli da koristite sve mogućnosti ove aplikacije neophodno je da se prvo ulogujete, što možete učiniti
+        klikom na dugme ispod.</p>
+      <a [routerLink]="['/login']" class="btn btn-primary btn-lg" role="button">Uloguj se</a>
+    </div>
+    <div class="col">
+      <img class="right" src="https://media.giphy.com/media/bcKmIWkUMCjVm/giphy.gif">
+    </div>
+  </div>
+</div>
+<div *ngIf="isLoggedIn">
 <div class="row mt-sm-4">
   <div class="col-12">
     <app-search-form (onSearch)="setFilter($event)"></app-search-form>
@@ -9,4 +23,5 @@
 <div class="mx-auto mt-sm-4" style="width: fit-content;">
   <ngb-pagination [page]="vehiclesPage.currentPage" (pageChange)="setPage($event)" [pageSize]="vehiclesPage.itemsPerPage"
                   [collectionSize]="vehiclesPage.totalItems"></ngb-pagination>
+</div>
 </div>

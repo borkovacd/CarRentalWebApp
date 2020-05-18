@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -70,7 +72,8 @@ public class User {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "user_type", nullable = true)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "user_type", nullable = true, length = 20)
 	private UserType userType;
 	
 	@Column(name = "blocked")

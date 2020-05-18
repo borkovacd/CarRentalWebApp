@@ -3,6 +3,7 @@
   <div class="row mt-4 mb-4">
     <div class="col">
       <img src="https://www.seslhd.health.nsw.gov.au/sites/default/files/2018-07/320x200.png"
+           width="320"
            class="float-left img-thumbnail"
            alt="...">
     </div>
@@ -16,11 +17,21 @@
           <label class="text-muted" for="inputEndDate">Do:</label>
           <input type="date" id="inputEndDate" name="inputEndDate" class="form-control" [(ngModel)]="endDate" (ngModelChange)="calculate()">
         </div>
-        <div class="mt-5" *ngIf="startDate && endDate">
-          <h6>Suma: {{amount}}€</h6>
-          Broj dana: {{ endDate.valueOf() | amDifference : startDate.valueOf() : 'days' }}
+        <div class="row">
+          <div class="col mt-5" *ngIf="startDate && endDate">
+            <h6>Suma: {{amount}}€</h6>
+            Broj dana: {{ endDate.valueOf() | amDifference : startDate.valueOf() : 'days' }}
+          </div>
+          <div class="col" *ngIf="admin">
+            <label class="text-muted" for="selectUser">Korisnik</label>
+            <select id="selectUser" name="selectUser" class="form-control" [(ngModel)]="selectedUser">
+              <option></option>
+              <option *ngFor="let user of users" [ngValue]="user">{{user.username}}</option>
+            </select>
+          </div>
         </div>
-        <div class="text-right mr-3">
+
+        <div class="text-right mr-3 mt-2">
           <input type="submit" class="btn btn-lg btn-success text-right mr-0" value="Iznajmi">
         </div>
       </form>

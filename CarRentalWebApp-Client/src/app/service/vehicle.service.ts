@@ -43,4 +43,18 @@ export class VehicleService {
   getVehicle(id: number) : Observable<Vehicle>{
     return this.client.get<Vehicle>("api/vehicles/"+id);
   }
+
+  public saveVehicle(item: Vehicle) : Observable<Vehicle> {
+    var url = "api/vehicles"
+    if(item.id) {
+      url += `/${item.id}`;
+      return this.client.put<Vehicle>(url, item);
+    } else {
+      return this.client.post<Vehicle>(url, item);
+    }
+  }
+
+  deleteVehicle(id: number) {
+    return this.client.delete(`api/vehicles/${id}`);
+  }
 }

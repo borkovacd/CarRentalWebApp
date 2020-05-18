@@ -3,6 +3,10 @@ import {ActivatedRoute} from '@angular/router';
 import {VehicleService} from '../service/vehicle.service';
 import {Vehicle} from '../model/vehicle';
 import {chunkByNumber} from 'ngx-bootstrap/carousel/utils';
+import {TokenStorageService} from '../_services/token-storage.service';
+import {VehicleType} from '../model/vehicle-type';
+import {User} from '../model/user';
+import {UserService} from '../_services/user.service';
 
 @Component({
   selector: 'app-rental-form',
@@ -10,6 +14,13 @@ import {chunkByNumber} from 'ngx-bootstrap/carousel/utils';
   styleUrls: ['./rental-form.component.css']
 })
 export class RentalFormComponent implements OnInit {
+
+  private roles: string[];
+  isLoggedIn : boolean = false;
+  admin : boolean = false;
+
+  selectedUser = null;
+  users: User[] = null;
 
   vehicleId : number = null;
   @Output("item")
@@ -21,7 +32,9 @@ export class RentalFormComponent implements OnInit {
   amount : number = null;
 
   constructor(private route: ActivatedRoute,
-              private vehicleService: VehicleService) { }
+              private vehicleService: VehicleService,
+              private tokenStorageService: TokenStorageService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -30,6 +43,15 @@ export class RentalFormComponent implements OnInit {
         this.vehicle = data;
       })
     })
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.admin = this.roles.includes('ROLE_ADMIN');
+    }
+    this.userService.getAllUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
 

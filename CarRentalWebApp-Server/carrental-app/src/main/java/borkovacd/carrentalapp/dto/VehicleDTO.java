@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +29,6 @@ public class VehicleDTO {
 	private BigDecimal rentalPrice;
 	private String name;
 	private String description;
-	
+	private String imageName;
 
 }

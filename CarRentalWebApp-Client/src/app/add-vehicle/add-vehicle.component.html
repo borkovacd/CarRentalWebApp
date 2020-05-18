@@ -1,0 +1,253 @@
+<form (ngSubmit)="addVehicle()" #addVehicleForm="ngForm">
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="selectVehicleBrand">Marka:</label>
+      <select id="selectVehicleBrand" name="selectVehicleBrand" class="form-control"
+              [(ngModel)]="vehicleBrand"
+              required #brandField="ngModel">
+        <option *ngFor="let brand of vehicleBrands" [ngValue]="brand">{{brand}}</option>
+      </select>
+      <div *ngIf="brandField.invalid && (brandField.dirty || brandField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="brandField.errors.required">
+          Izbor marke vozila je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterEnginePower">Snaga motora:</label>
+      <input type=number id="enterEnginePower" name="enterEnginePower" class="form-control"
+             [(ngModel)]="vehicleEnginePower"
+             required #enginePowerField="ngModel">
+      <div *ngIf="enginePowerField.invalid && (enginePowerField.dirty || enginePowerField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="enginePowerField.errors.required">
+          Unos snage motora je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterDoorNumber">Broj vrata:</label>
+      <input id="enterDoorNumber" name="enterDoorNumber" type=number class="form-control"
+             [(ngModel)]="vehicleDoorsNumber"
+             required #doorNumber="ngModel">
+      <div *ngIf="doorNumber.invalid && (doorNumber.dirty || doorNumber.touched)"
+           class="alert alert-danger">
+        <div *ngIf="doorNumber.errors.required">
+          Unos broja vrata je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="enterVehicleModel">Model:</label>
+      <input id="enterVehicleModel" name="enterVehicleModel" type="text" class="form-control"
+             [(ngModel)]="vehicleModel"
+             required #modelField="ngModel">
+      <div *ngIf="modelField.invalid && (modelField.dirty || modelField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="modelField.errors.required">
+          Unos modela vozila je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterEngineVolume">Zapremina motora:</label>
+      <input id="enterEngineVolume" name="enterEngineVolume" type=number class="form-control"
+             [(ngModel)]="vehicleEngineVolume"
+             required #engineVolumeField="ngModel">
+      <div *ngIf="engineVolumeField.invalid && (engineVolumeField.dirty || engineVolumeField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="engineVolumeField.errors.required">
+          Unos zapremine motora je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterSeatNumber">Broj sedišta:</label>
+      <input id="enterSeatNumber" name="enterSeatNumber" type=number class="form-control"
+             [(ngModel)]="vehicleSeatsNumber"
+             required #seatNumberField="ngModel">
+      <div *ngIf="seatNumberField.invalid && (seatNumberField.dirty || seatNumberField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="seatNumberField.errors.required">
+          Unos broja sedišta je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="selectVehicleDriveType">Pogon:</label>
+      <select id="selectVehicleDriveType" name="selectVehicleDriveType" class="form-control"
+              [(ngModel)]="vehicleDriveType"
+              required #driveTypeField="ngModel">
+        <option>AWD</option>
+        <option>FWD</option>
+        <option>RWD</option>
+      </select>
+      <div *ngIf="driveTypeField.invalid && (driveTypeField.dirty || driveTypeField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="driveTypeField.errors.required">
+          Izbor tipa pogona je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="selectVehicleTransmissionType">Tip menjača:</label>
+      <select id="selectVehicleTransmissionType" name="selectVehicleTransmissionType" class="form-control"
+              [(ngModel)]="vehicleTransmissionType"
+              required #transmissionTypeField="ngModel">
+        <option>MANUAL</option>
+        <option>AUTOMATIC</option>
+        <option>CVT</option>
+      </select>
+      <div *ngIf="transmissionTypeField.invalid && (transmissionTypeField.dirty || transmissionTypeField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="transmissionTypeField.errors.required">
+          Izbor tipa menjača je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterGearNumber">Broj brzina:</label>
+      <input id="enterGearNumber" name="enterGearNumber" type=number class="form-control"
+             [(ngModel)]="vehicleGearsNumber"
+             required #gearNumber="ngModel">
+      <div *ngIf="gearNumber.invalid && (gearNumber.dirty || gearNumber.touched)"
+           class="alert alert-danger">
+        <div *ngIf="gearNumber.errors.required">
+          Unos broja brzina je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="enterDescription">Opis:</label>
+      <textarea id="enterDescription" name="enterDescription" rows="3" class="form-control"
+                [(ngModel)]="vehicleDescription">
+      </textarea>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="selectVehicleType">Tip vozila:</label>
+      <select id="selectVehicleType" name="selectVehicleType" class="form-control"
+              [(ngModel)]="vehicleType"
+              required #typeField="ngModel">
+        <option *ngFor="let type of vehicleTypes" [ngValue]="type">{{type}}</option>
+      </select>
+      <div *ngIf="typeField.invalid && (typeField.dirty || typeField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="typeField.errors.required">
+          Izbor tipa vozila je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="selectVehicleBodyType">Tip karoserije:</label>
+      <select id="selectVehicleBodyType" name="selectVehicleBodyType" class="form-control"
+              [(ngModel)]="vehicleBodyType"
+              required #bodyTypeField="ngModel">
+        <option *ngFor="let bodyType of vehicleBodyTypes" [ngValue]="bodyType">{{bodyType}}</option>
+      </select>
+      <div *ngIf="bodyTypeField.invalid && (bodyTypeField.dirty || typeField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="bodyTypeField.errors.required">
+          Izbor tipa karoserije je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted">Gorivo:</label>
+      <div>
+        <form *ngIf="show" [formGroup]="form" #fuelForm>
+          <div *ngFor="let fuelType of form.controls.fuelTypes.controls; let i = index">
+            <label formArrayName="fuelTypes">
+              <input type="checkbox" [formControlName]="i"/>
+              {{vehicleFuelTypes[i]}}
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="chooseVehicleImage">Fotografija:</label>
+      <label class="font-italic ml-4" *ngIf="vehicleId && !imageUploaded">{{imageName}}</label>
+      <div>
+        <input #fileChooser id="chooseVehicleImage" name="chooseVehicleImage" type="file"
+               (change)="onFileChanged($event)">
+        <input class="btn btn-primary" type="button" (click)="onUpload()" value="Potvrdi izbor"
+               [disabled]="!uploadPossible">
+      </div>
+      <div class="mt-3">
+        <label for="enterRentalPrice">Cena:</label>
+        <div class="input-group text-center">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupPrepend">€</span>
+          </div>
+          <input type="number" class="form-control" id="enterRentalPrice" name="enterRentalPrice"
+                 [(ngModel)]="vehiclePrice"
+                 required #priceField="ngModel">
+          <div class="input-group-append">
+            <span class="input-group-text" id="input-group-append">.00</span>
+          </div>
+        </div>
+        <div *ngIf="priceField.invalid && (priceField.dirty || priceField.touched)"
+             class="alert alert-danger">
+          <div *ngIf="priceField.errors.required">
+            Unos cene je obavezan
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <button type="button" class="btn-warning btn mr-4" [routerLink]="['/vehicles-admin']">Odustani</button>
+    <button type="button" class="btn-primary btn mr-4" (click)="onClear()">Resetuj polja</button>
+    <input type=submit class="btn-success btn " [disabled]="!addVehicleForm.form.valid || !allRequiredDataEntered"
+           value="{{addOrUpdateVehicle}}">
+  </div>
+  <br/>
+</form>
+
+
+<!--<div class="container row">
+  <div class="col-md-12">
+    <h1>Upload Image</h1>
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-6">
+    <input type="file" (change)="onFileChanged($event)">
+  </div>
+  <div class="col-md-6">
+    <input type="button" (click)="onUpload()" value="upload">
+  </div>
+</div>
+<hr />
+<div class="container row">
+  <div class="col-md-12">
+    <div *ngIf=message>{{message}}</div>
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-6">
+    <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+           name="name" />
+  </div>
+  <div class="col-md-6">
+    <input type="button" (click)="getImage()" value="Get Image">
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-12">
+    <div *ngIf=retrievedImage>
+      <img [src]="retrievedImage">
+    </div>
+  </div>
+</div>-->

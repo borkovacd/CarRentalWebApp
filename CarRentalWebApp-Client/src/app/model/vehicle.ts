@@ -8,11 +8,12 @@ export interface Vehicle {
   engineVolume: number;
   enginePower: number;
   transmissionType: string;
-  gearNumber: string;
+  gearNumber: number;
   driveType: string;
   numberOfSeats: number;
   numberOfDoors: number;
   rentalPrice: number;
   name: string;
   description: string;
+  imageName: string;
 }

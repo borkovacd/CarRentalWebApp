@@ -1,0 +1,12 @@
+<div class="row mt-sm-4">
+  <div class="col-12">
+    <app-search-form (onSearch)="setFilter($event)"></app-search-form>
+  </div>
+</div>
+<div class="mt-sm-4" >
+  <app-vehicles-table-overview (onVehicleDelete)="deleteVehicle($event)" [items]="vehiclesPage.items"></app-vehicles-table-overview>
+</div>
+<div class="mx-auto mt-sm-4" style="width: fit-content;">
+  <ngb-pagination [page]="vehiclesPage.currentPage" (pageChange)="setPage($event)" [pageSize]="vehiclesPage.itemsPerPage"
+                  [collectionSize]="vehiclesPage.totalItems"></ngb-pagination>
+</div>

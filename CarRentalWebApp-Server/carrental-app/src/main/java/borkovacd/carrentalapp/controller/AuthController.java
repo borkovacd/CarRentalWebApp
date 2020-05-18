@@ -14,13 +14,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import borkovacd.carrentalapp.enums.ERole;
+import borkovacd.carrentalapp.enums.UserType;
 import borkovacd.carrentalapp.model.Role;
 import borkovacd.carrentalapp.model.User;
 import borkovacd.carrentalapp.payload.request.LoginRequest;
@@ -120,6 +120,11 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
+		user.setUserType(UserType.USER);
+		for(Role role : roles) {
+			if(role.getName().equals(ERole.ROLE_ADMIN))
+				user.setUserType(UserType.ADMIN);
+		}
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

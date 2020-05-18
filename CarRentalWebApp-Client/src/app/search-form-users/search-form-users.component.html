@@ -1,0 +1,28 @@
+<form (ngSubmit)="search()">
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label class="text-muted" for="inputFirstName">Ime</label>
+      <input id="inputFirstName" name="inputFirstName" class="form-control" [(ngModel)]="filterFirstName">
+    </div>
+    <div class="form-group col-md-2">
+      <label class="text-muted" for="inputLastName">Prezime</label>
+      <input id="inputLastName" name="inputLastName" class="form-control" [(ngModel)]="filterLastName">
+    </div>
+    <div class="form-group col-md-2">
+      <label class="text-muted" for="inputUsername">Korisničko ime</label>
+      <input id="inputUsername" name="inputUsername" class="form-control" [(ngModel)]="filterUsername">
+    </div>
+    <div class="form-group col-md-2">
+      <label class="text-muted" for="selectIsBlocked">Blokiran</label>
+      <select [required]="true" id="selectIsBlocked" name="selectIsBlocked" class="form-control" [(ngModel)]="filterBlocked">
+        <option>Ne</option>
+        <option>Da</option>
+      </select>
+    </div>
+    <div class="ml-4 mt-sm-3">
+      <input type="submit" class="btn btn-lg btn-primary" value="Pretraži">
+    </div>
+  </div>
+</form>
+
+
