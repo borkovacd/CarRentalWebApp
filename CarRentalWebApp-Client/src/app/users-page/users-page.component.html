@@ -4,7 +4,10 @@
   </div>
 </div>
 <div class="mt-sm-4" >
-  <app-users-overview [items]="usersPage.items"></app-users-overview>
+  <app-users-overview (onUserDelete)="deleteUser($event)"
+                      (onUserBlock)="blockUser($event)"
+                      [items]="usersPage.items">
+  </app-users-overview>
 </div>
 <div class="mx-auto mt-sm-4" style="width: fit-content;">
   <ngb-pagination [page]="usersPage.currentPage" (pageChange)="setPage($event)" [pageSize]="usersPage.itemsPerPage"

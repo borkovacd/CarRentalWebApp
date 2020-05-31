@@ -1,1 +1,107 @@
-<p>add-user works!</p>
+<form (ngSubmit)="addUser()" #addUserForm="ngForm">
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="selectUserType">Tip korisnika:</label>
+      <select id="selectUserType" name="selectUserType" class="form-control"
+              [(ngModel)]="user.userType"
+              required #userTypeField="ngModel">
+        <option>USER</option>
+        <option>ADMIN</option>
+      </select>
+      <div *ngIf="userTypeField.invalid && (userTypeField.dirty || userTypeField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="userTypeField.errors.required">
+          Izbor tipa korisnika je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="enterFirstName">Ime:</label>
+      <input id="enterFirstName" name="enterFirstName" type="text" class="form-control"
+             [(ngModel)]="user.firstName"
+             required [readOnly]="updating" #firstNameField="ngModel">
+      <div *ngIf="firstNameField.invalid && (firstNameField.dirty || firstNameField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="firstNameField.errors.required">
+          Unos imena je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterLastName">Prezime:</label>
+      <input id="enterLastName" name="enterLastName" type=text class="form-control"
+             [(ngModel)]="user.lastName"
+             required [readOnly]="updating" #lastNameField="ngModel">
+      <div *ngIf="lastNameField.invalid && (lastNameField.dirty || lastNameField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="lastNameField.errors.required">
+          Unos prezimena je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="enterEmail">Email:</label>
+      <input id="enterEmail" name="enterEmail" type="email" class="form-control"
+             [(ngModel)]="user.email"
+             required [readOnly]="updating" #emailField="ngModel">
+      <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="emailField.errors.required">
+          Unos emaila je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterUsername">Korisničko ime:</label>
+      <input id="enterUsername" name="enterUserName" type="text" class="form-control"
+             [(ngModel)]="user.username"
+             required [readOnly]="updating" #usernameField="ngModel">
+      <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="usernameField.errors.required">
+          Unos korisničkog imena je obavezan
+        </div>
+      </div>
+    </div>
+    <div class="col" *ngIf="!updating">
+      <label class="text-muted" for="enterPassword">Lozinka:</label>
+      <input id="enterPassword" name="enterPassword" type=password class="form-control"
+             [(ngModel)]="user.password"
+             [required]="!updating" [readOnly]="updating" #passwordField="ngModel">
+      <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="passwordField.errors.required">
+          Unos lozinke je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="user.userType==='USER'">
+    <div class="col">
+      <label class="text-muted" for="enterPhoneNumber">Broj telefona: </label>
+      <input id="enterPhoneNumber" name="enterPhoneNumber" type="text" class="form-control"
+             [(ngModel)]="user.phoneNumber" [required]="user.userType==='USER'">
+    </div>
+    <div class="col">
+      <label class="text-muted" for="enterAddress">Adresa:</label>
+      <input id="enterAddress" name="enterAddress" type="text" class="form-control"
+             [(ngModel)]="user.address" [required]="user.userType==='USER'">
+    </div>
+    <div class="col">
+      <label class="text-muted" for="chooseBirthDate">Datum rođenja:</label>
+      <input id="chooseBirthDate" name="chooseBirthDate" type="date" class="form-control"
+             [(ngModel)]="user.dateOfBirth" [required]="user.userType==='USER'">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <button type="button" class="btn-warning btn mr-4" [routerLink]="['/users']">Odustani</button>
+    <button type="button" class="btn-primary btn mr-4" *ngIf="!updating" (click)="onClear()">Resetuj polja</button>
+    <input type=submit class="btn-success btn " [disabled]="!addUserForm.form.valid"
+           value="{{addOrUpdateUser}}">
+  </div>
+  <br/>
+</form>

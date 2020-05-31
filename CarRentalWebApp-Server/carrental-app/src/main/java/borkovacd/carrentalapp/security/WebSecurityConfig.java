@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //telling spring security not to create a session
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/api/test/**").permitAll() //why permit all?
+			.antMatchers("/api/test/**").permitAll()
 			.antMatchers("/api/brands").permitAll()
 			.antMatchers("/api/types").permitAll()
 			.antMatchers("/api/bodyTypes").permitAll()

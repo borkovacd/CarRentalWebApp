@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {Page} from '../model/page';
 import {SearchUser} from '../model/search-user';
+import {Vehicle} from '../model/vehicle';
 
 const API_URL = 'api/test/';
 
@@ -34,7 +35,7 @@ export class UserService {
   getUsersPage(filters: SearchUser = null, page: number | null = null): Observable<Page<User>> {
     var options = {params: {}};
     if (page !== null) {
-      options['params']['page'] = '' + (page - 1);
+      options['params']['page'] = ""+(page-1);
     }
     if (filters !== null) {
       if (filters.firstName != null) {
@@ -51,5 +52,32 @@ export class UserService {
       }
     }
     return this.http.get<Page<User>>('api/users', options);
+  }
+
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>('api/users/' + id);
+  }
+
+  saveUser(item: User): Observable<User> {
+    var url = 'api/users';
+    if (item.id) {
+      url += `/${item.id}`;
+      return this.http.put<User>(url, item);
+    } else {
+      return this.http.post<User>(url, item);
+    }
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`api/users/${id}`);
+  }
+
+  blockUser(item: User) {
+    var url = 'api/users';
+    var id : number = item.id;
+    url += `/${id}`;
+    var options = {params: {}};
+    options['params']['blocked'] = true;
+    return this.http.put(url, item, options);
   }
 }

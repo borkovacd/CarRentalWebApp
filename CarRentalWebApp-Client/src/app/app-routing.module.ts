@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'add-vehicle', component: AddVehicleComponent },
   { path: 'add-vehicle/:id', component: AddVehicleComponent },
   { path: 'add-user', component: AddUserComponent },
+  { path: 'add-user/:id', component: AddUserComponent },
   { path: 'details/:id', component: VehicleDetailsComponent },
   { path: 'renting/:id', component: RentalFormComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }

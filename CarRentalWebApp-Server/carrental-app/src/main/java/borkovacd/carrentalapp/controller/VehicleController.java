@@ -213,8 +213,8 @@ public class VehicleController {
 				mapper.map(src -> src.getFuelTypesNames(),
 						VehicleDTO::setFuelTypes);
 			});
-			VehicleDTO createdVehicleDTO = modelMapper.map(vehicle, VehicleDTO.class);
-			return new ResponseEntity<VehicleDTO>(createdVehicleDTO, HttpStatus.OK);		
+			VehicleDTO updatedVehicleDTO = modelMapper.map(vehicle, VehicleDTO.class);
+			return new ResponseEntity<VehicleDTO>(updatedVehicleDTO, HttpStatus.OK);		
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}	

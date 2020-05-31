@@ -29,6 +29,7 @@ import { VehiclesTableOverviewComponent } from './vehicles-table-overview/vehicl
 import { VehiclesPageComponent } from './vehicles-page/vehicles-page.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import {ForbiddenValidatorDirective} from './_custom_validators/forbidden-name.directive';
+import { YesNoPipe } from './pipes/yes-no.pipe';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {ForbiddenValidatorDirective} from './_custom_validators/forbidden-name.d
     VehiclesTableOverviewComponent,
     VehiclesPageComponent,
     AddUserComponent,
-    ForbiddenValidatorDirective
+    ForbiddenValidatorDirective,
+    YesNoPipe
   ],
   imports: [
     BrowserModule,

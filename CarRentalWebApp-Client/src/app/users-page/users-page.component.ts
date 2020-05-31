@@ -13,10 +13,6 @@ import {UserService} from '../_services/user.service';
 })
 export class UsersPageComponent implements OnInit {
 
-  filterFirstName: string = "";
-  filterLastName: string = "";
-  filterUsername: string = "";
-  filterBlocked: boolean = null;
   allFilters : SearchUser = null;
   private page: number = 1;
 
@@ -44,6 +40,18 @@ export class UsersPageComponent implements OnInit {
   public setFilter(filters: SearchUser) {
     this.allFilters = filters;
     this.refreshView();
+  }
+
+  deleteUser(id: number) {
+    this.userService.deleteUser(id).subscribe( () => {
+      this.refreshView();
+    });
+  }
+
+  blockUser(user: User) {
+    this.userService.blockUser(user).subscribe( () => {
+      this.refreshView();
+    });
   }
 
 }

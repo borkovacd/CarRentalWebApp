@@ -26,6 +26,22 @@ public class UserService {
 	public Page<User> getAllUsers(String firstName, String lastName, String username, boolean isBlocked, Pageable pageable) {
 		return userRepository.findAllUsers(firstName, lastName, username, isBlocked, pageable);
 	}
+
+	public User findById(Long id) {
+		return userRepository.findById(id).orElse(null);
+	}
+
+	public User save(User user) {
+		return userRepository.save(user);
+	}
+
+	public boolean existsByUsername(String username) {
+		return userRepository.existsByUsername(username);
+	}
+	
+	public boolean existsByEmail(String email) {
+		return userRepository.existsByEmail(email);
+	}
 	
 
 }

@@ -24,13 +24,20 @@
       <td>{{item.firstName}}</td>
       <td>{{item.lastName}}</td>
       <td>{{item.username}}</td>
-      <td>{{item.blocked}}</td>
+      <td [ngStyle]="{
+            color: item.blocked
+               ? 'hsl(348, 100%, 61%)'
+               : 'hsl(141, 53%, 53%)'
+            }">
+        <b>{{ item.blocked | yesNo }}</b>
+      </td>
       <td></td>
       <td></td>
       <td>
-        <a [routerLink]="['/change', item.id]" class="btn btn-success ml-1" href="#">Izmeni</a>
-        <a class="btn btn-warning ml-4" (click)="blockUser(item.id)" href="#">Blokiraj</a>
-        <a class="btn btn-danger ml-4" (click)="deleteUser(item.id)" href="#">Izbriši</a>
+        <a [routerLink]="['/add-user', item.id]" *ngIf="!(item.blocked || item.deleted)" class="btn btn-success ml-1"
+           href="#">Izmeni</a>
+        <a class="btn btn-warning ml-4" *ngIf="!item.blocked" (click)="blockUser(item)">Blokiraj</a>
+        <a class="btn btn-danger ml-4" *ngIf="!item.deleted" (click)="deleteUser(item.id)">Izbriši</a>
       </td>
 
     </tr>

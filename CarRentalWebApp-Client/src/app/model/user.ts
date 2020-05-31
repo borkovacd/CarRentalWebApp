@@ -8,4 +8,7 @@ export interface User {
   dateOfBirth: string;
   phoneNumber: string;
   blocked: boolean;
+  deleted: boolean;
+  userType : string;
+  password : string;
 }
