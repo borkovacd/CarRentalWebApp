@@ -1,0 +1,41 @@
+<form (ngSubmit)="search()">
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label class="text-muted" for="inputUser">Korisnik</label>
+      <input id="inputUser" name="inputUser" class="form-control" [(ngModel)]="filterUser">
+    </div>
+    <div class="form-group col-md-3">
+      <label class="text-muted" for="selectVehicleType">Tip</label>
+      <select id="selectVehicleType" name="selectVehicleType" class="form-control" [(ngModel)]="filterVehicleType">
+        <option></option>
+        <option *ngFor="let type of vehicleTypes" [ngValue]="type">{{type.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label class="text-muted" for="selectVehicleBrand">Marka</label>
+      <select id="selectVehicleBrand" name="selectVehicleBrand" class="form-control" [(ngModel)]="filterVehicleBrand">
+        <option></option>
+        <option *ngFor="let brand of vehicleBrands" [ngValue]="brand">{{brand.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label class="text-muted" for="inputVehicleModel">Model</label>
+      <input id="inputVehicleModel" name="inputVehicleModel" class="form-control" [(ngModel)]="filterVehicleModel">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label class="text-muted" for="inputStartDate">Početak iznajmljivanja</label>
+      <input type="date" id="inputStartDate" name="inputStartDate" class="form-control" [(ngModel)]="filterStartDate">
+    </div>
+    <div class="form-group col-md-3">
+      <label class="text-muted" for="inputEndDate">Završetak iznajmljivanja</label>
+      <input type="date" id="inputEndDate" name="inputEndDate" class="form-control" [(ngModel)]="filterEndDate">
+    </div>
+    <div class="ml-4 mt-sm-3">
+      <input type="submit" class="btn btn-lg btn-primary" value="Pretraži">
+    </div>
+  </div>
+</form>
+
+

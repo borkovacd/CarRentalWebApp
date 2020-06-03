@@ -18,8 +18,6 @@ export class VehicleService {
     if(page !== null) {
       options["params"]["page"] = ""+(page-1);
     }
-    options["params"]["lowestPrice"] = 0;
-    options["params"]["highestPrice"] = 100000;
     if(filters !== null) {
       if(filters.type != null) {
         options["params"]["type"] = filters.type;
@@ -38,6 +36,10 @@ export class VehicleService {
       }
     }
     return this.client.get<Page<Vehicle>>("api/vehicles", options)
+  }
+
+  getVehicles() : Observable<Vehicle[]>{
+    return this.client.get<Vehicle[]>("api/vehicles");
   }
 
   getVehicle(id: number) : Observable<Vehicle>{

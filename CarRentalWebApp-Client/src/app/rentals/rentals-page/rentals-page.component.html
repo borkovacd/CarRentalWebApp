@@ -1,0 +1,14 @@
+<div class="row mt-sm-4">
+  <div class="col-12">
+    <app-search-form-rentals (onSearch)="setFilter($event)"></app-search-form-rentals>
+  </div>
+</div>
+<div class="mt-sm-4" >
+  <app-rentals-overview (onRentalDelete)="deleteRental($event)"
+                      [items]="rentalsPage.items">
+  </app-rentals-overview>
+</div>
+<div class="mx-auto mt-sm-4" style="width: fit-content;">
+  <ngb-pagination [page]="rentalsPage.currentPage" (pageChange)="setPage($event)" [pageSize]="rentalsPage.itemsPerPage"
+                  [collectionSize]="rentalsPage.totalItems"></ngb-pagination>
+</div>

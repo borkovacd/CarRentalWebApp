@@ -1,6 +1,8 @@
 package borkovacd.carrentalapp.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,10 @@ public class VehicleService {
 	public Page<Vehicle> getVehicles(String type, String brand, String model,BigDecimal lowestPrice, BigDecimal highestPrice, Pageable pageable) {
 		return vehicleRepository.findAllVehicles(type, brand, model, lowestPrice, highestPrice, pageable);
 	}
+	
+	public List<Vehicle> getAllVehicles() {
+		return vehicleRepository.findAll();
+	}
 
 	public Vehicle findById(Long id) {
 		return vehicleRepository.findById(id).orElse(null);
@@ -27,6 +33,8 @@ public class VehicleService {
 	public Vehicle save(Vehicle vehicle) {
 		return vehicleRepository.save(vehicle);
 	}
+
+	
 
 
 

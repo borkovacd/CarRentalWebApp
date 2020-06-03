@@ -1,0 +1,1 @@
+INSERT INTO rentals (id, deleted, end_date, rental_price, start_date, user_id, vehicle_id) VALUES (1, false, '2020-06-15', 565.65, '2020-06-01', 15, 1);

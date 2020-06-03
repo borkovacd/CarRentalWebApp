@@ -34,8 +34,7 @@
       <td></td>
       <td></td>
       <td>
-        <a [routerLink]="['/add-user', item.id]" *ngIf="!(item.blocked || item.deleted)" class="btn btn-success ml-1"
-           href="#">Izmeni</a>
+        <a [routerLink]="['/add-user', item.id]" *ngIf="!(item.blocked || item.deleted)" class="btn btn-success ml-1">Izmeni</a>
         <a class="btn btn-warning ml-4" *ngIf="!item.blocked" (click)="blockUser(item)">Blokiraj</a>
         <a class="btn btn-danger ml-4" *ngIf="!item.deleted" (click)="deleteUser(item.id)">Izbriši</a>
       </td>

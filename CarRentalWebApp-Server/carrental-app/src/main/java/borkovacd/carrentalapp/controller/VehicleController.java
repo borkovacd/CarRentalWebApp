@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import borkovacd.carrentalapp.dto.PageDTO;
 import borkovacd.carrentalapp.dto.VehicleDTO;
+import borkovacd.carrentalapp.dto.VehicleFuelTypeDTO;
 import borkovacd.carrentalapp.enums.DriveType;
 import borkovacd.carrentalapp.enums.TransmissionType;
 import borkovacd.carrentalapp.model.ImageModel;
@@ -58,8 +59,26 @@ public class VehicleController {
 	VehicleFuelTypeService vehicleFuelTypeService;
 	@Autowired
 	ImageRepository imageRepository;
-
+	
 	@RequestMapping(method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<List<VehicleDTO>> getAllVehicles() {
+		List<Vehicle> vehicles = vehicleService.getAllVehicles();
+		List<VehicleDTO> vehiclesDTO = new ArrayList<VehicleDTO>();
+		for(Vehicle vehicle : vehicles) {
+			ModelMapper modelMapper = new ModelMapper();
+			// *** CHECK IF IT'S GOOD PRACTICE ***
+			modelMapper.typeMap(Vehicle.class, VehicleDTO.class).addMappings(mapper -> {
+				mapper.map(src -> src.getFuelTypesNames(),
+						VehicleDTO::setFuelTypes);
+			});
+			VehicleDTO vehicleDTO = modelMapper.map(vehicle, VehicleDTO.class);
+			vehiclesDTO.add(vehicleDTO);
+		}
+		return new ResponseEntity<List<VehicleDTO>>(vehiclesDTO, HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, params = {"page"})
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<PageDTO<VehicleDTO>> getAllVehicles(
 			@RequestParam(required = false, defaultValue = "") String type,

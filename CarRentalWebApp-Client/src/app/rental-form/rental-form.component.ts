@@ -49,7 +49,7 @@ export class RentalFormComponent implements OnInit {
       this.roles = user.roles;
       this.admin = this.roles.includes('ROLE_ADMIN');
     }
-    this.userService.getAllUsers().subscribe(users => {
+    this.userService.getUsers().subscribe(users => {
       this.users = users;
     });
   }

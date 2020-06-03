@@ -1,0 +1,75 @@
+<form (ngSubmit)="addRental()" #addRentalForm="ngForm">
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="selectVehicle">Vozilo:</label>
+      <select id="selectVehicle" name="selectVehicle" class="form-control"
+              [(ngModel)]="rental.vehicle" (ngModelChange)="calculate()"
+              required #vehicleField="ngModel">
+        <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{vehicle.name}}</option>
+      </select>
+      <div *ngIf="vehicleField.invalid && (vehicleField.dirty || vehicleField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="vehicleField.errors.required">
+          Izbor vozila je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="selectUser">Korisnik:</label>
+      <select id="selectUser" name="selectUser" class="form-control"
+              [(ngModel)]="rental.user"
+              required #userField="ngModel">
+        <option *ngFor="let user of users" [ngValue]="user">{{user.firstName}}  {{user.lastName}}</option>
+      </select>
+      <div *ngIf="userField.invalid && (userField.dirty || userField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="userField.errors.required">
+          Izbor korisnika je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="inputStartDate">Datum početka:</label>
+      <input type="date" id="inputStartDate" name="inputStartDate" class="form-control"
+             required [(ngModel)]="rental.startDate" (ngModelChange)="calculate()" #startDateField="ngModel">
+      <div *ngIf="startDateField.invalid && (startDateField.dirty || startDateField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="startDateField.errors.required">
+          Izbor početnog datuma je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <label class="text-muted" for="inputEndDate">Datum završetka:</label>
+      <input type="date" id="inputEndDate" name="inputEndDate" class="form-control"
+             required [(ngModel)]="rental.endDate" (ngModelChange)="calculate()" #endDateField="ngModel">
+      <div *ngIf="endDateField.invalid && (endDateField.dirty || endDateField.touched)"
+           class="alert alert-danger">
+        <div *ngIf="endDateField.errors.required">
+          Izbor krajnjeg datuma je obavezan
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="startDate && endDate && rental.vehicle">
+    <div class="col">
+      <h6>Suma: {{amount}}€</h6>
+      Broj dana: {{ endDate.valueOf() | amDifference : startDate.valueOf() : 'days' }}
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <button type="button" class="btn-warning btn mr-4" [routerLink]="['/rentals']">Odustani</button>
+    <button type="button" class="btn-primary btn mr-4" *ngIf="!updating" (click)="onClear()">Resetuj polja</button>
+    <input type=submit class="btn-success btn " [disabled]="!addRentalForm.form.valid"
+           value="{{addOrUpdateRental}}">
+  </div>
+  <br/>
+</form>
+
+<app-details [item]="rental.vehicle"></app-details>

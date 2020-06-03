@@ -1,0 +1,41 @@
+<div class="row ml-md-2">
+  <div class="col-10">
+    <h3>Iznajmljivanja:</h3>
+  </div>
+  <div class="col">
+    <a [routerLink]="['/add-rental']" class="btn btn-success mr-auto ml-auto">Dodaj iznajmljivanje</a>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Korisnik</th>
+      <th scope="col">Naziv vozila</th>
+      <th scope="col">Marka</th>
+      <th scope="col">Model</th>
+      <th scope="col">Početak</th>
+      <th scope="col">Završetak</th>
+      <th scope="col"></th>
+      <th scope="col">Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+      <td>{{item.vehicle.name}}</td>
+      <td>{{item.vehicle.brandName}}</td>
+      <td>{{item.vehicle.model}}</td>
+      <td>{{item.startDate}}</td>
+      <td>{{item.endDate}}</td>
+      <td></td>
+      <td>
+        <a [routerLink]="['/add-rental', item.id]" *ngIf="!item.deleted" class="btn btn-success ml-1">Izmeni</a>
+        <a class="btn btn-danger ml-4" *ngIf="!item.deleted" (click)="deleteRental(item.id)">Izbriši</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+

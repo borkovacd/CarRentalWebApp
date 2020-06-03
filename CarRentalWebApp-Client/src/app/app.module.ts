@@ -30,6 +30,10 @@ import { VehiclesPageComponent } from './vehicles-page/vehicles-page.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import {ForbiddenValidatorDirective} from './_custom_validators/forbidden-name.directive';
 import { YesNoPipe } from './pipes/yes-no.pipe';
+import { RentalsPageComponent } from './rentals/rentals-page/rentals-page.component';
+import { RentalsOverviewComponent } from './rentals/rentals-overview/rentals-overview.component';
+import { SearchFormRentalsComponent } from './rentals/search-form-rentals/search-form-rentals.component';
+import { AddRentalComponent } from './rentals/add-rental/add-rental.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { YesNoPipe } from './pipes/yes-no.pipe';
     VehiclesPageComponent,
     AddUserComponent,
     ForbiddenValidatorDirective,
-    YesNoPipe
+    YesNoPipe,
+    RentalsPageComponent,
+    RentalsOverviewComponent,
+    SearchFormRentalsComponent,
+    AddRentalComponent
   ],
   imports: [
     BrowserModule,

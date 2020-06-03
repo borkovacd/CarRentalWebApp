@@ -12,10 +12,13 @@ import {AddVehicleComponent} from './add-vehicle/add-vehicle.component';
 import {UsersPageComponent} from './users-page/users-page.component';
 import {VehiclesPageComponent} from './vehicles-page/vehicles-page.component';
 import {AddUserComponent} from './add-user/add-user.component';
+import {RentalsPageComponent} from './rentals/rentals-page/rentals-page.component';
+import {AddRentalComponent} from './rentals/add-rental/add-rental.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'users', component: UsersPageComponent},
+  { path: 'rentals', component: RentalsPageComponent },
   { path: 'vehicles-admin', component: VehiclesPageComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -26,6 +29,8 @@ const routes: Routes = [
   { path: 'add-vehicle/:id', component: AddVehicleComponent },
   { path: 'add-user', component: AddUserComponent },
   { path: 'add-user/:id', component: AddUserComponent },
+  { path: 'add-rental', component: AddRentalComponent },
+  { path: 'add-rental/:id', component: AddRentalComponent },
   { path: 'details/:id', component: VehicleDetailsComponent },
   { path: 'renting/:id', component: RentalFormComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }

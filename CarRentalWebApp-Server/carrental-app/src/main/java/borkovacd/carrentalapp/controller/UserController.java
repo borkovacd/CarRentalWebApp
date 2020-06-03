@@ -56,21 +56,28 @@ public class UserController {
 	@Autowired
 	RoleRepository roleRepository;
 
-	/*@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
 		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
 		List<User> users = userService.getAllUsers();
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
+		
 		for(User user: users) {
-			ModelMapper modelMapper = new ModelMapper();
-			modelMapper.typeMap(User.class, UserDTO.class);
-			UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-			usersDTO.add(userDTO);
+			//Check if this user is currently logged in
+			if(user.getId() != userDetails.getId()) {
+				ModelMapper modelMapper = new ModelMapper();
+				modelMapper.typeMap(User.class, UserDTO.class);
+				UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+				usersDTO.add(userDTO);
+			}
 		}
 		return new ResponseEntity<List<UserDTO>>(usersDTO, HttpStatus.OK);
 	}
-	 */
-	@RequestMapping(method = RequestMethod.GET)
+	 
+	@RequestMapping(method = RequestMethod.GET, params = "page")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<PageDTO<UserDTO>> getAllUsers(
 			@RequestParam(required = false, defaultValue = "") String firstName,

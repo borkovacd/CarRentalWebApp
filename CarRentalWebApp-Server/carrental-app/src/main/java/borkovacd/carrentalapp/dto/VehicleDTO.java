@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -14,8 +16,14 @@ import lombok.Setter;
 public class VehicleDTO {
 	
 	private Long id;
+	
+	@NotBlank
 	private String typeName;
+	
+	@NotBlank
 	private String brandName;
+	
+	@NotBlank
 	private String model;
 	private String bodyTypeName;
 	private List<String> fuelTypes = new ArrayList<String>();
