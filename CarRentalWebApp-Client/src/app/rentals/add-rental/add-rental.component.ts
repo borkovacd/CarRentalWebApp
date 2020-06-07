@@ -7,6 +7,8 @@ import {VehicleService} from '../../service/vehicle.service';
 import {RentalService} from '../../_services/rental.service';
 import {Vehicle} from '../../model/vehicle';
 import {NgForm} from '@angular/forms';
+import {DateFormatPipe} from 'angular2-moment';
+import {now} from 'moment';
 
 @Component({
   selector: 'app-add-rental',
@@ -60,7 +62,6 @@ export class AddRentalComponent implements OnInit {
     });
 
     this.vehicleService.getVehicles().subscribe(vehicles => {
-      //console.log(vehicles);
       this.vehicles = vehicles;
     });
     this.userService.getUsers().subscribe(users => {
@@ -92,8 +93,16 @@ export class AddRentalComponent implements OnInit {
       var date2 = new Date(this.rental.endDate);
       var date2PlusDay = new Date(date2.getTime() + (1000 * 60 * 60 * 24));
       this.endDate = date2PlusDay;
-      if(date2.valueOf() < date1.valueOf()) {
+      var currentDate = new Date();
+      currentDate.setHours(0,0,0,0);
+
+      //console.log("Current date: " + currentDate.getDate());
+      //console.log("Start date: " + date1.getDate());
+      if(date2.valueOf() < date1.valueOf() || date1.getDate() < currentDate.getDate()) {
         alert("Both dates need to be valid! Try again!");
+        if(date1.getDate() < currentDate.getDate()) {
+          alert("Dates can't be in the past! Try again!");
+        }
         this.rental.startDate = null;
         this.startDate = null;
         this.rental.endDate = null;
@@ -102,7 +111,6 @@ export class AddRentalComponent implements OnInit {
         this.endDateField.reset();
       } else {
         var days = (date2PlusDay.valueOf() - date1.valueOf())/1000/60/60/24;
-        //alert((date2.valueOf() - date1.valueOf())/1000/60/60/24);
         this.amount = this.rental.vehicle.rentalPrice * days;
       }
 
@@ -114,6 +122,10 @@ export class AddRentalComponent implements OnInit {
       console.log(rental);
       this.router.navigateByUrl('rentals');
     });
+  }
+
+  compareFn(c1: any, c2:any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
 }

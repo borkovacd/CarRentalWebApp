@@ -32,13 +32,16 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
 
 	@Query("SELECT r FROM Rental r WHERE "
 			+ "(r.vehicle.id = :vehicleId) "
-			+ "AND "
+			+ " AND "
 			+ "( ((:startDate >= r.startDate) AND ( (:endDate <= r.endDate) OR (:startDate <= r.endDate) ) ) "
-			+ "OR "
-			+ "((:startDate <= r.startDate) AND (:endDate >= r.startDate)))")
+			+ " OR "
+			+ "((:startDate <= r.startDate) AND (:endDate >= r.startDate))) "
+			+ " AND "
+			+ "(:rentalId is null or r.id != :rentalId)")
 	List<Rental> findAllRentalsBetweenDates(
-			@Param("vehicleId") Long vehicle, 
+			@Param("vehicleId") Long vehicleId, 
 			@Param("startDate") LocalDate startDate, 
-			@Param("endDate") LocalDate endDate);
+			@Param("endDate") LocalDate endDate,
+			@Param("rentalId") Long rentalId);
 
 }

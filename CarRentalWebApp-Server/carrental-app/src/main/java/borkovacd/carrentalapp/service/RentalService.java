@@ -23,8 +23,8 @@ public class RentalService {
 		return rentalRepository.findAllRentals(user, vehicleType, vehicleBrand, vehicleModel, startDate, endDate, pageable);
 	}
 
-	public boolean isVehicleAvailable(Long vehicleId, LocalDate startDate, LocalDate endDate) {
-		List<Rental> rentals = getRentalsBetweenDates(vehicleId, startDate, endDate);
+	public boolean isVehicleAvailable(Long vehicleId, LocalDate startDate, LocalDate endDate, Long rentalId) {
+		List<Rental> rentals = getRentalsBetweenDates(vehicleId, startDate, endDate, rentalId);
 		if(rentals.isEmpty())
 			return true;
 		else {
@@ -36,13 +36,17 @@ public class RentalService {
 		}
 	}
 
-	private List<Rental> getRentalsBetweenDates(Long vehicleId, LocalDate startDate, LocalDate endDate) {
+	private List<Rental> getRentalsBetweenDates(Long vehicleId, LocalDate startDate, LocalDate endDate, Long rentalId) {
 		List<Rental> rentals = new ArrayList<Rental>();
-		return rentalRepository.findAllRentalsBetweenDates(vehicleId, startDate, endDate);
+		return rentalRepository.findAllRentalsBetweenDates(vehicleId, startDate, endDate, rentalId);
 	}
 
 	public Rental saveRental(Rental rental) {
 		return rentalRepository.save(rental);
+	}
+
+	public Rental findById(Long id) {
+		return rentalRepository.findById(id).orElse(null);
 	}
 	
 	

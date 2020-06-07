@@ -3,8 +3,8 @@
     <div class="col">
       <label class="text-muted" for="selectVehicle">Vozilo:</label>
       <select id="selectVehicle" name="selectVehicle" class="form-control"
-              [(ngModel)]="rental.vehicle" (ngModelChange)="calculate()"
-              required #vehicleField="ngModel">
+              [(ngModel)]="rental.vehicle" (ngModelChange)="calculate()" [compareWith]="compareFn"
+              required #vehicleField="ngModel" >
         <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{vehicle.name}}</option>
       </select>
       <div *ngIf="vehicleField.invalid && (vehicleField.dirty || vehicleField.touched)"
@@ -19,7 +19,7 @@
     <div class="col">
       <label class="text-muted" for="selectUser">Korisnik:</label>
       <select id="selectUser" name="selectUser" class="form-control"
-              [(ngModel)]="rental.user"
+              [(ngModel)]="rental.user" [compareWith]="compareFn"
               required #userField="ngModel">
         <option *ngFor="let user of users" [ngValue]="user">{{user.firstName}}  {{user.lastName}}</option>
       </select>
