@@ -7,9 +7,6 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +34,8 @@ import borkovacd.carrentalapp.enums.ERole;
 import borkovacd.carrentalapp.enums.UserType;
 import borkovacd.carrentalapp.model.Role;
 import borkovacd.carrentalapp.model.User;
-import borkovacd.carrentalapp.repository.RoleRepository;
 import borkovacd.carrentalapp.security.services.UserDetailsImpl;
+import borkovacd.carrentalapp.service.RoleService;
 import borkovacd.carrentalapp.service.UserService;
 
 @Controller
@@ -48,13 +45,10 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-
+	@Autowired
+	RoleService roleService;
 	@Autowired
 	PasswordEncoder encoder;
-
-	//MAKE SERVICE!
-	@Autowired
-	RoleRepository roleRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
@@ -137,15 +131,15 @@ public class UserController {
 		Set<Role> roles = new HashSet<>();
 		if(userDTO.getUserType().equals("USER")) {
 			user.setUserType(UserType.USER);
-			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+			Role userRole = roleService.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
 		} else {
 			user.setUserType(UserType.ADMIN);
-			Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+			Role adminRole = roleService.findByName(ERole.ROLE_ADMIN)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(adminRole);
-			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+			Role userRole = roleService.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
 		}
@@ -199,15 +193,15 @@ public class UserController {
 			Set<Role> roles = new HashSet<>();
 			if(userDTO.getUserType().equals("USER")) {
 				user.setUserType(UserType.USER);
-				Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+				Role userRole = roleService.findByName(ERole.ROLE_USER)
 						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 				roles.add(userRole);
 			} else {
 				user.setUserType(UserType.ADMIN);
-				Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+				Role adminRole = roleService.findByName(ERole.ROLE_ADMIN)
 						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 				roles.add(adminRole);
-				Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+				Role userRole = roleService.findByName(ERole.ROLE_USER)
 						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 				roles.add(userRole);
 			}

@@ -90,11 +90,24 @@ public class User {
 				joinColumns = @JoinColumn(name = "user_id"),
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-	
-	public User(String username, String email, String password) {
-		this.username = username;
+
+	public User(String firstName, String lastName, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password, String address,
+			LocalDate dateOfBirth, String phoneNumber, UserType userType, boolean blocked, boolean deleted) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
+		this.username = username;
 		this.password = password;
+		this.address = address;
+		this.dateOfBirth = dateOfBirth;
+		this.phoneNumber = phoneNumber;
+		this.userType = userType;
+		this.blocked = blocked;
+		this.deleted = deleted;
 	}
+	
+	
 
 }

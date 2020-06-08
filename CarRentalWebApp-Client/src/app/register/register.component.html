@@ -5,26 +5,35 @@
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="profile-img-card"
     />
-    <form
-      *ngIf="!isSuccessful"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
+    <form *ngIf="!isSuccessful"
+          name="form" (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="username">Ime</label>
+        <input type="text" class="form-control"
+               id="firstName" name="firstName"
+               [(ngModel)]="form.firstName" #firstName="ngModel"
+               required />
+        <div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
+          <div *ngIf="firstName.errors.required">Ime je obavezno</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username">Prezime</label>
+        <input type="text" class="form-control"
+               id="lastName" name="lastName"
+               [(ngModel)]="form.lastName" #lastName="ngModel"
+               required />
+        <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
+          <div *ngIf="lastName.errors.required">Prezime je obavezno</div>
+        </div>
+      </div>
       <div class="form-group">
         <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          minlength="3"
-          maxlength="20"
-          #username="ngModel"
-        />
+        <input type="text" class="form-control"
+               id="username" name="username"
+               [(ngModel)]="form.username" #username="ngModel"
+               required minlength="3" maxlength="20" />
         <div class="alert-danger" *ngIf="f.submitted && username.invalid">
           <div *ngIf="username.errors.required">Username is required</div>
           <div *ngIf="username.errors.minlength">
@@ -37,16 +46,9 @@
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          class="form-control"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          email
-          #email="ngModel"
-        />
+        <input id="email" type="email" class="form-control" name="email"
+               [(ngModel)]="form.email" #email="ngModel"
+               required email />
         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
           <div *ngIf="email.errors.required">Email is required</div>
           <div *ngIf="email.errors.email">
@@ -56,16 +58,9 @@
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
+        <input type="password" id="password" class="form-control" name="password"
+               [(ngModel)]="form.password" #password="ngModel"
+               required minlength="6" />
         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
           <div *ngIf="password.errors.required">Password is required</div>
           <div *ngIf="password.errors.minlength">
@@ -73,12 +68,29 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="row mt-4">
+        <div class="col">
+          <label class="text-muted" for="phoneNumber">Broj telefona: </label>
+          <input id="phoneNumber" name="phoneNumber" type="text" class="form-control"
+                 [(ngModel)]="form.phoneNumber" >
+        </div>
+        <div class="col">
+          <label class="text-muted" for="address">Adresa:</label>
+          <input id="address" name="address" type="text" class="form-control"
+                 [(ngModel)]="form.address">
+        </div>
+        <div class="col">
+          <label class="text-muted" for="dateOfBirth">Datum rođenja:</label>
+          <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control"
+                 [(ngModel)]="form.dateOfBirth">
+        </div>
+      </div>
+      <div class="form-group mt-4">
         <button class="btn btn-primary btn-block">Sign Up</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
+        Signup failed!<br/>{{ errorMessage }}
       </div>
     </form>
 
