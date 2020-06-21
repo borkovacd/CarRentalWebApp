@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TokenStorageService} from './_services/token-storage.service';
 
 @Component({
@@ -8,14 +8,19 @@ import {TokenStorageService} from './_services/token-storage.service';
 })
 export class AppComponent implements OnInit {
 
+  isCollapsed = true;
+
   private roles: string[];
   isLoggedIn = false;
   showAdminPage = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService) {
+
+  }
 
   ngOnInit() {
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -32,5 +37,6 @@ export class AppComponent implements OnInit {
     this.tokenStorageService.signOut();
     window.location.reload();
   }
-}
 
+
+}

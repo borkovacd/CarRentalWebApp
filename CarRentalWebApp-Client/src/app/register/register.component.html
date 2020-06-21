@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!--<div class="col-md-12">
   <div class="card card-container">
     <img
       id="profile-img"
@@ -98,4 +98,227 @@
       Your registration is successful!
     </div>
   </div>
-</div>
+</div>-->
+
+<app-my-navbar></app-my-navbar>
+
+<div class="wrapper">
+  <div class="page-header">
+    <div class="page-header-image"></div>
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+            <div class="square square-7" id="square7"></div>
+            <div class="square square-8" id="square8"></div>
+            <div class="card card-register">
+              <div class="card-header">
+                <img
+                  alt="Card image"
+                  class="card-img"
+                  src="assets/img/square1-red.png"
+                />
+
+                <h5 class="card-title">register</h5>
+              </div>
+              <div class="card-body">
+                <form *ngIf="!isSuccessful" (ngSubmit)="f.form.valid && onSubmit()"
+                      name="form" class="form"
+                      #f="ngForm" novalidate>
+                  <div class="input-group "
+                       [ngClass]="{ 'input-group-focus': focus === true,
+                          'has-danger' : f.submitted && firstName.invalid}">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-single-02"> </i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
+                           [ngClass]="{ 'btn-tooltip form-control-danger' : f.submitted && firstName.invalid}"
+                           id="firstName" name="firstName" placeholder="Ime"
+                           [(ngModel)]="form.firstName" #firstName="ngModel"
+                           required
+                           (focus)="focus = true"
+                           (blur)="focus = false"
+                           placement="bootom"
+                           [tooltipEnable]="f.submitted && firstName.invalid"
+                           tooltip="Ime je obavezno"/>
+                  </div>
+                  <!--<div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
+                    <div *ngIf="firstName.errors.required">Ime je obavezno</div>
+                  </div>-->
+                  <div class="input-group"
+                       [ngClass]="{ 'input-group-focus': focus1 === true,
+                        'has-danger' : f.submitted && lastName.invalid}">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-single-02"> </i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
+                           [ngClass]="{ 'btn-tooltip form-control-danger' : f.submitted && lastName.invalid}"
+                           id="lastName" name="lastName" placeholder="Prezime"
+                           [(ngModel)]="form.lastName" #lastName="ngModel"
+                           required
+                           (focus)="focus1 = true"
+                           (blur)="focus1 = false"
+                           placement="bootom"
+                           [tooltipEnable]="f.submitted && lastName.invalid"
+                           tooltip="Prezime je obavezno"/>
+                    <!--<div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
+                      <div *ngIf="lastName.errors.required">Prezime je obavezno</div>
+                    </div>-->
+                  </div>
+                  <div class="input-group"
+                       [ngClass]="{ 'input-group-focus': focus2 === true,
+                        'has-danger' : f.submitted && username.invalid}">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-single-02"> </i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
+                           [ngClass]="{ 'btn-tooltip form-control-danger' : f.submitted && username.invalid}"
+                           id="username" name="username" placeholder="Korisničko ime"
+                           [(ngModel)]="form.username" #username="ngModel"
+                           required minlength="3" maxlength="20"
+                           (focus)="focus2 = true"
+                           (blur)="focus2 = false"
+                           placement="bootom"
+                           [tooltipEnable]="f.submitted && username.invalid"
+                           tooltip="Korisničko ime je obavezno"/>
+                    <!--<div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                      <div *ngIf="username.errors.required">Username is required</div>
+                      <div *ngIf="username.errors.minlength">
+                        Username must be at least 3 characters
+                      </div>
+                      <div *ngIf="username.errors.maxlength">
+                        Username must be at most 20 characters
+                      </div>
+                    </div>-->
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <div class="form-group has-danger">
+                      <input
+                        class="form-control form-control-danger"
+                        type="email"
+                        value="Error Input"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="input-group"
+                    [ngClass]="{ 'input-group-focus': focus3 === true }"
+                  >
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-email-85"> </i>
+                      </div>
+                    </div>
+                    <input
+                      id="email" name="email" placeholder="Email"
+                      type="email" class="form-control"
+                      [ngClass]="{ 'btn-tooltip form-control-danger' : f.submitted && firstName.invalid}"
+                      [(ngModel)]="form.email" #email="ngModel"
+                      required email
+                      (focus)="focus3 = true"
+                      (blur)="focus3 = false"/>
+                    <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                      <div *ngIf="email.errors.required">Email is required</div>
+                      <div *ngIf="email.errors.email">
+                        Email must be a valid email address
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="input-group"
+                    [ngClass]="{ 'input-group-focus': focus4 === true }"
+                  >
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-lock-circle"> </i>
+                      </div>
+                    </div>
+                    <input
+                      type="password" id="password" name="password" class="form-control"
+                      [ngClass]="{ 'btn-tooltip form-control-danger' : f.submitted && firstName.invalid}"
+                      [(ngModel)]="form.password" #password="ngModel"
+                      required minlength="6"
+                      placeholder="Lozinka"
+                      (focus)="focus4 = true"
+                      (blur)="focus4 = false"/>
+                    <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                      <div *ngIf="password.errors.required">Password is required</div>
+                      <div *ngIf="password.errors.minlength">
+                        Lozinka mora sadržati minimum 6 karaktera!
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group"
+                       [ngClass]="{ 'input-group-focus': focus5 === true }">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-map-big"> </i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
+                           id="address" name="address" placeholder="Adresa"
+                           [(ngModel)]="form.address" #address="ngModel"
+                           (focus)="focus5 = true"
+                           (blur)="focus5 = false"/>
+                  </div>
+                  <div class="input-group"
+                       [ngClass]="{ 'input-group-focus': focus6 === true }">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-map-big"> </i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
+                           id="dateOfBirth" name="dateOfBirth" placeholder="Datum rođenja"
+                           [(ngModel)]="form.dateOfBirth" #dateOfBirth="ngModel"
+                           (focus)="focus6 = true"
+                           (blur)="focus6 = false"
+                           bsDatepicker
+                           data-datepicker-color="danger"
+                           [bsConfig]="{ isAnimated: true, containerClass: 'theme-red' }"
+                           [bsValue]="form.dateOfBirth"/>
+                  </div>
+                  <div class="input-group"
+                       [ngClass]="{ 'input-group-focus': focus7 === true }">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-tablet-2"> </i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
+                           id="phoneNumber" name="phoneNumber" placeholder="Broj telefona"
+                           [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel"
+                           (focus)="focus7 = true"
+                           (blur)="focus7 = false"/>
+                  </div>
+                  <div class="form-group mt-4">
+                    <button class="btn btn-danger btn-round btn-lg btn-block">Sign Up</button>
+                  </div>
+
+                  <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    Signup failed!<br/>{{ errorMessage }}
+                  </div>
+                </form>
+                <div class="alert alert-success" *ngIf="isSuccessful">
+                  Your registration is successful!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="register-bg"></div>
+          <div class="square square-1" id="square1"></div>
+          <div class="square square-2" id="square2"></div>
+          <div class="square square-3" id="square3"></div>
+          <div class="square square-4" id="square4"></div>
+          <div class="square square-5" id="square5"></div>
+          <div class="square square-6" id="square6"></div>
+        </div>
+      </div>
+    </div>
+  </div>

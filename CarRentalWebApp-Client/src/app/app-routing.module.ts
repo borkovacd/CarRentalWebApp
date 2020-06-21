@@ -14,9 +14,10 @@ import {VehiclesPageComponent} from './vehicles-page/vehicles-page.component';
 import {AddUserComponent} from './add-user/add-user.component';
 import {RentalsPageComponent} from './rentals/rentals-page/rentals-page.component';
 import {AddRentalComponent} from './rentals/add-rental/add-rental.component';
+import {IndexComponent} from './index/index.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomePageComponent },
+  { path: 'home', component: IndexComponent },
   { path: 'users', component: UsersPageComponent},
   { path: 'rentals', component: RentalsPageComponent },
   { path: 'vehicles-admin', component: VehiclesPageComponent},
