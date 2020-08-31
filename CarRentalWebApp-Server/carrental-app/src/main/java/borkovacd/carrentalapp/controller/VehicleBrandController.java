@@ -24,9 +24,8 @@ public class VehicleBrandController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<VehicleBrandDTO>> getAllVehicleBrands() {
-		List<VehicleBrand> brands = vehicleBrandService.findAll();
 		List<VehicleBrandDTO> brandsDTO = new ArrayList<VehicleBrandDTO>();
-		for(VehicleBrand brand : brands) {
+		for(VehicleBrand brand : vehicleBrandService.findAll()) {
 			ModelMapper modelMapper = new ModelMapper();
 			modelMapper.typeMap(VehicleBrand.class, VehicleBrandDTO.class);
 			VehicleBrandDTO brandDTO = modelMapper.map(brand, VehicleBrandDTO.class);

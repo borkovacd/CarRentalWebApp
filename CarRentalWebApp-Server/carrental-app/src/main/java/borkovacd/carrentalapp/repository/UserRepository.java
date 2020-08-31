@@ -32,5 +32,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 			@Param("username") String username, 
 			@Param("isBlocked") boolean isBlocked, 
 			Pageable pageable);
+	
 
 }

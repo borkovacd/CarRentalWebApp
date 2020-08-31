@@ -167,7 +167,11 @@ public class VehicleController {
 		vehicle.setName(vehicleDTO.getName());
 		vehicle.setDescription(vehicleDTO.getDescription());
 		vehicle.setDeleted(false);
+		
+		//****************************
+		//OTKOMENTARISI ZA SLIKU (ZAKOMENTARISANO ZA POTREBE TESTA)
 		vehicle.setImage(retrievedImage);
+	
 
 		vehicle = vehicleService.save(vehicle);
 		ModelMapper modelMapper = new ModelMapper();
@@ -224,7 +228,11 @@ public class VehicleController {
 			vehicle.setRentalPrice(vehicleDTO.getRentalPrice());
 			vehicle.setName(vehicleDTO.getName());
 			vehicle.setDescription(vehicleDTO.getDescription());
+			
+			//****************************
+			//OTKOMENTARISI ZA SLIKU (ZAKOMENTARISANO ZA POTREBE TESTA)
 			vehicle.setImage(retrievedImage);
+			
 			vehicle = vehicleService.save(vehicle);
 			ModelMapper modelMapper = new ModelMapper();
 			// *** CHECK IF IT'S GOOD PRACTICE ***
